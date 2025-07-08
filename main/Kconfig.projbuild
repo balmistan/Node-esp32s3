@@ -1,0 +1,46 @@
+menu "Wi-Fi Configuration"
+
+config MY_WIFI_SSID
+    string "Wi-Fi SSID"
+    default "Galaxy A02s85f5"
+
+config MY_WIFI_PASS
+    string "Wi-Fi Password"
+    default "fodv4762"
+
+endmenu
+
+
+menu "MQTT Configuration"
+
+config MY_MQTT_BROKER_URI
+    string "MQTT Broker URI"
+    default "mqtt://192.168.43.150:1883"
+
+config MY_MQTT_USERNAME
+    string "MQTT Username"
+    default "admin"
+
+config MY_MQTT_PASSWORD
+    string "MQTT Password"
+    default "dalisan19780"
+
+config MY_DEVICE_NAME
+    string "Device name (used as the prefix of the MQTT topic)"
+    default "esp1"
+
+choice
+    prompt "MQTT Protocol Version"
+    default MY_MQTT_PROTOCOL_V5
+    help
+        Select the MQTT protocol version to use.
+
+config MY_MQTT_PROTOCOL_V3
+    bool "MQTT 3.1.1"
+
+config MY_MQTT_PROTOCOL_V5
+    bool "MQTT 5.0"
+
+endchoice
+
+endmenu

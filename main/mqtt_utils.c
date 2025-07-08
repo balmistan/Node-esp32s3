@@ -1,0 +1,116 @@
+#include "arduino_wrapper.h"
+#include "mqtt_utils.h"
+#include "esp_log.h"
+#include <string.h>
+
+static const char *TAG = "MQTT_UTILS";
+
+#define PM 0
+#define DR 1
+#define DW 2
+#define AW 3
+#define AI 4
+#define DI 5
+#define DT 6
+#define PING 7
+#define ADI 8
+
+uint8_t offset = 48;
+
+
+
+void handle_incoming_mqtt_data(esp_mqtt_event_handle_t event)
+{
+    char topic[event->topic_len + 1];
+    char data[event->data_len + 1];
+
+    memcpy(topic, event->topic, event->topic_len);
+    topic[event->topic_len] = '\0';
+
+    memcpy(data, event->data, event->data_len);
+    data[event->data_len] = '\0';
+
+    commands(data);
+
+}
+
+void mqtt_publish_message(esp_mqtt_client_handle_t client, const char *topic, const char *message)
+{
+    int msg_id = esp_mqtt_client_publish(client, topic, message, 0, 1, 0);
+    if (msg_id >= 0) {
+        ESP_LOGI(TAG, "Messaggio pubblicato su topic '%s': %s", topic, message);
+    } else {
+        ESP_LOGE(TAG, "Errore pubblicazione messaggio su topic '%s'", topic);
+    }
+}
+
+
+void commands(char *receved_msg)
+{
+   ESP_LOGI(TAG, "   receved message: %s", receved_msg);
+
+  uint8_t i=0;
+  uint8_t cmd=0;
+  gpio_num_t pin=0;
+  uint8_t value=0;
+  uint8_t mode=0;
+  
+
+  if(strlen(receved_msg)>0){
+    bool exit_on_error=false;
+    do{
+      cmd = (uint8_t)receved_msg[i] - offset;
+      switch(cmd){
+        case PM:  
+          pin = ((gpio_num_t)receved_msg[i+1]) - offset;                                                                                //pinMode(pin, mode);
+          mode = ((int)receved_msg[i+2] - offset) >> 2;
+          pinMode(pin, mode);
+          i+=3;
+          break;
+        case DW:  
+          pin = ((gpio_num_t)receved_msg[i+1]) - offset;                                                                                //digitalWrite(pin, value);
+          value = ((uint8_t)receved_msg[i+2] - offset) & 0x01;
+          digitalWrite(pin, value);
+          i+=3;
+          break;
+          case AW:  
+          pin = ((gpio_num_t)receved_msg[i+1]) - offset;                                                                                //analogWrite(pin, value);
+          value = (receved_msg[i+2] - offset) & 0x03;
+          value = value | (((uint8_t)receved_msg[i+3] - offset) << 2);
+          analogWrite(pin, value);
+          i+=4;
+          break;
+    /*    case AI:                                                                                                                      //attachInterrupt(pin, mode);
+          pin = ((uint8_t)receved_msg[i+1]) - offset;            
+          mode = (((uint8_t)receved_msg[i+2]) - offset)>>2;
+          interrupt_enable(pin, mode, 0);
+          snprintf(debug_msg, sizeof(debug_msg), "> attachInterrupt(%d, %d)", pin, mode);
+          i+=3;
+          break;
+        case DI:                                                                                                                      //detachInterrupt(pin, mode);
+          pin = ((uint8_t)receved_msg[i+1]) - offset;             
+          interrupt_disable(pin);
+          snprintf(debug_msg, sizeof(debug_msg), "> detachInterrupt(%d)", pin);
+          i+=2;
+          break;
+        case PING:
+          mqtt_send("ping", "pong");
+          i+=1;
+          break;
+        case ADI:                                                                                                                       //attachDebounceInterrupt(pin, mode);
+          pin = ((uint8_t)receved_msg[i+1]) - offset;            
+          mode = (((uint8_t)receved_msg[i+2]) - offset)>>2;
+          interrupt_enable(pin, mode, 20);
+          snprintf(debug_msg, sizeof(debug_msg), "> attachDebounceInterrupt(%d, %d)", pin, mode);
+        i+=3;
+        break;
+        */
+        default:
+         ESP_LOGI(TAG, "   > command %d not found!", cmd);
+         exit_on_error=true;
+          break;
+      }
+     
+    }while(i<strlen(receved_msg) && !exit_on_error);
+  }
+}
