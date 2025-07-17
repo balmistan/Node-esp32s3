@@ -1,0 +1,1275 @@
+[
+    {
+        "id": "d4fdf6bb2a345898",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "bbe3ae4f9ae51c8f",
+        "type": "tab",
+        "label": "Led_1 ON/OFF",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "10392be039c9d1b1",
+        "type": "tab",
+        "label": "LED_1 Analog",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "69f2cb50737a4933",
+        "type": "tab",
+        "label": "NodeMCU Control",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "208e991693e179cb",
+        "type": "subflow",
+        "name": "encoder",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "ee0c94c383d65e67"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 340,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "ee0c94c383d65e67",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "ab7b328d30ae0788",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.0.22",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "bbce5445f2ed7ffa",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "http://192.168.0.22",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "b588965e00983323",
+        "type": "mqtt-broker",
+        "name": "Smartphone",
+        "broker": "192.168.96.90",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "0873338bcdee1b7b",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "navigationStyle": "default",
+        "titleBarStyle": "default"
+    },
+    {
+        "id": "b15b699a7236d086",
+        "type": "ui-page",
+        "name": "RaspiESP-Control",
+        "ui": "0873338bcdee1b7b",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "c6da207e1b8e3ae2",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "c4a855ffb0ea5084",
+        "type": "ui-group",
+        "name": "Interrupt function",
+        "page": "b15b699a7236d086",
+        "width": "6",
+        "height": "1",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "76c874f2247ebb66",
+        "type": "ui-group",
+        "name": "Led B",
+        "page": "b15b699a7236d086",
+        "width": "6",
+        "height": "1",
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "610328e23a5c02bc",
+        "type": "ui-group",
+        "name": "Button state",
+        "page": "b15b699a7236d086",
+        "width": "3",
+        "height": "1",
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "c6da207e1b8e3ae2",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "ee0c94c383d65e67",
+        "type": "function",
+        "z": "208e991693e179cb",
+        "name": "encoder",
+        "func": "\nvar str_out = \"\";\nvar arr_in = JSON.parse(msg.payload);\nvar i=0;\nvar tmp = \"\";\nvar offset = 48;\n\nif(arr_in && arr_in.length >0){\n    do{\n        switch(arr_in[i]['function']){\n            case \"pinMode\":\n                str_out += String.fromCharCode(0+offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);   \n                str_out += String.fromCharCode( (arr_in[i]['mode'] << 2 ) + offset); \n                break;\n            case \"digitalRead\":\n                str_out += String.fromCharCode(1+offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                break;\n            case \"digitalWrite\":\n                str_out += String.fromCharCode(2+offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode(arr_in[i]['value'] + offset);\n                break;\n            case \"analogWrite\":\n                str_out += String.fromCharCode(3 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode( (arr_in[i]['value'] & 0x03) + offset);\n                str_out += String.fromCharCode((arr_in[i]['value'] >> 2) + offset);\n                break;\n            case \"attachInterrupt\":\n                str_out += String.fromCharCode(4 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode((arr_in[i]['mode'] << 2) + offset);\n                break;\n            case \"detachInterrupt\":\n                str_out += String.fromCharCode(5 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                break;\n            case \"digitalToggle\":\n                str_out += String.fromCharCode(6 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                break;\n            case \"ping\":\n                str_out += String.fromCharCode(7 + offset);\n                break;\n            case \"attachDebounceInterrupt\":\n                str_out += String.fromCharCode(8 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode((arr_in[i]['mode'] << 2) + offset);\n                break;\n            default:\n                break;\n        }\n        i++\n    } while (i < arr_in.length);\n}\n\nmsg.payload = str_out;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b4d39950fa75e1d2",
+        "type": "inject",
+        "z": "bbe3ae4f9ae51c8f",
+        "name": "on 5",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "\"[{\\\"function\\\":\\\"digitalWrite\\\",\\\"pin\\\":5,\\\"value\\\":1}]\"",
+        "payloadType": "json",
+        "x": 530,
+        "y": 240,
+        "wires": [
+            [
+                "1c467d5b7f441483"
+            ]
+        ]
+    },
+    {
+        "id": "e5092ea0eb4aa5d5",
+        "type": "inject",
+        "z": "bbe3ae4f9ae51c8f",
+        "name": "off 5",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "\"[{\\\"function\\\":\\\"digitalWrite\\\",\\\"pin\\\":5,\\\"value\\\":0}]\"",
+        "payloadType": "json",
+        "x": 530,
+        "y": 300,
+        "wires": [
+            [
+                "1c467d5b7f441483"
+            ]
+        ]
+    },
+    {
+        "id": "8678639cf7a8ebb4",
+        "type": "mqtt in",
+        "z": "bbe3ae4f9ae51c8f",
+        "name": "",
+        "topic": "esp1/ready",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "b588965e00983323",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 60,
+        "wires": [
+            [
+                "c6e3dfddc38f804d"
+            ]
+        ]
+    },
+    {
+        "id": "c6e3dfddc38f804d",
+        "type": "function",
+        "z": "bbe3ae4f9ae51c8f",
+        "name": "setup",
+        "func": "\nmsg.payload = JSON.stringify([\n    {\n        \"function\": \"pinMode\",\n        \"pin\": 5,\n        \"mode\": 1\n    }\n]);\n \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 120,
+        "wires": [
+            [
+                "1c467d5b7f441483"
+            ]
+        ]
+    },
+    {
+        "id": "491ed68f8dce6096",
+        "type": "inject",
+        "z": "bbe3ae4f9ae51c8f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 140,
+        "wires": [
+            [
+                "c6e3dfddc38f804d"
+            ]
+        ]
+    },
+    {
+        "id": "1c467d5b7f441483",
+        "type": "subflow:208e991693e179cb",
+        "z": "bbe3ae4f9ae51c8f",
+        "name": "",
+        "x": 840,
+        "y": 80,
+        "wires": [
+            [
+                "790a1f4e15a9391a"
+            ]
+        ]
+    },
+    {
+        "id": "790a1f4e15a9391a",
+        "type": "mqtt out",
+        "z": "bbe3ae4f9ae51c8f",
+        "name": "",
+        "topic": "esp1/in",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b588965e00983323",
+        "x": 1060,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "7b7e46ec1a0c3394",
+        "type": "mqtt out",
+        "z": "10392be039c9d1b1",
+        "name": "esp1/in",
+        "topic": "esp1/in",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b588965e00983323",
+        "x": 1060,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "1c1414db87639320",
+        "type": "inject",
+        "z": "10392be039c9d1b1",
+        "name": "OFF-Led_1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "\"[{\\\"function\\\":\\\"digitalWrite\\\",\\\"pin\\\":5,\\\"value\\\":0}]\"",
+        "payloadType": "json",
+        "x": 410,
+        "y": 460,
+        "wires": [
+            [
+                "372f0bcf91ada37b"
+            ]
+        ]
+    },
+    {
+        "id": "340f8a3780dc2fa9",
+        "type": "inject",
+        "z": "10392be039c9d1b1",
+        "name": "ON-Led_1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "\"[{\\\"function\\\":\\\"digitalWrite\\\",\\\"pin\\\":5,\\\"value\\\":1}]\"",
+        "payloadType": "json",
+        "x": 400,
+        "y": 400,
+        "wires": [
+            [
+                "372f0bcf91ada37b"
+            ]
+        ]
+    },
+    {
+        "id": "8fdc45f99e419078",
+        "type": "inject",
+        "z": "10392be039c9d1b1",
+        "name": "Analog Led 1 (100)",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "\"[{\\\"function\\\":\\\"analogWrite\\\",\\\"pin\\\":5,\\\"value\\\":100}]\"",
+        "payloadType": "json",
+        "x": 450,
+        "y": 640,
+        "wires": [
+            [
+                "372f0bcf91ada37b"
+            ]
+        ]
+    },
+    {
+        "id": "1e2824570dc5291d",
+        "type": "inject",
+        "z": "10392be039c9d1b1",
+        "name": "Analog Led 1 (250)",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "\"[{\\\"function\\\":\\\"analogWrite\\\",\\\"pin\\\":5,\\\"value\\\":250}]\"",
+        "payloadType": "json",
+        "x": 430,
+        "y": 740,
+        "wires": [
+            [
+                "372f0bcf91ada37b"
+            ]
+        ]
+    },
+    {
+        "id": "b40b09bb04d59da9",
+        "type": "comment",
+        "z": "10392be039c9d1b1",
+        "name": "digitalWrite(pin,value)",
+        "info": "digitalWrite(pin, value) \nimplemented as:\n{\n    \"cmd\": \"DW\",\n    \"gpio\": gpio number (for example 16),\n    \"value\": logic value (1 or 0)\n}",
+        "x": 180,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "51049e70383b26a6",
+        "type": "comment",
+        "z": "10392be039c9d1b1",
+        "name": "analogWrite(pin, value)",
+        "info": "analogWrite(pin, value) \nimplemented as:\n{\n    \"cmd\": \"AW\",\n    \"gpio\": gpio number (for example 5),\n    \"value\": int value (0-255)\n}",
+        "x": 180,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "372f0bcf91ada37b",
+        "type": "subflow:208e991693e179cb",
+        "z": "10392be039c9d1b1",
+        "name": "",
+        "x": 860,
+        "y": 500,
+        "wires": [
+            [
+                "7b7e46ec1a0c3394",
+                "5ecf58efd5e4b38e"
+            ]
+        ]
+    },
+    {
+        "id": "0f3505ce22dcdbd3",
+        "type": "mqtt in",
+        "z": "10392be039c9d1b1",
+        "name": "",
+        "topic": "esp1/ready",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "b588965e00983323",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 100,
+        "wires": [
+            [
+                "7bcc69f824b10d44"
+            ]
+        ]
+    },
+    {
+        "id": "7bcc69f824b10d44",
+        "type": "function",
+        "z": "10392be039c9d1b1",
+        "name": "setup",
+        "func": "\nmsg.payload = JSON.stringify([\n    {\n        \"function\": \"pinMode\",\n        \"pin\": 5,\n        \"mode\": 1\n    }\n]);\n \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 140,
+        "wires": [
+            [
+                "372f0bcf91ada37b"
+            ]
+        ]
+    },
+    {
+        "id": "9b5f785b250e7dbb",
+        "type": "inject",
+        "z": "10392be039c9d1b1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 180,
+        "wires": [
+            [
+                "7bcc69f824b10d44"
+            ]
+        ]
+    },
+    {
+        "id": "5ecf58efd5e4b38e",
+        "type": "debug",
+        "z": "10392be039c9d1b1",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "18d0a4b839a932dd",
+        "type": "inject",
+        "z": "10392be039c9d1b1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 340,
+        "y": 940,
+        "wires": [
+            [
+                "e7c61f3499a65369"
+            ]
+        ]
+    },
+    {
+        "id": "e7c61f3499a65369",
+        "type": "function",
+        "z": "10392be039c9d1b1",
+        "name": "function 1",
+        "func": "\nvar mult = 1;\nif(global.get(\"count\") === undefined){\n    global.set(\"count\", 5);\n} else if (global.get(\"count\")<=245){\n    global.set(\"count\", 45+global.get(\"count\"));\n}else{\n    global.set(\"count\", 5);\n}\n\n\n\n\n\n\n\n\nmsg.payload = \"[{\"+\n    \"\\\"function\\\":\\\"analogWrite\\\",\\\"pin\\\":5,\\\"value\\\":\" + global.get(\"count\") +\n    \"},{\\\"function\\\":\\\"analogWrite\\\",\\\"pin\\\":4,\\\"value\\\":\" + (255-global.get(\"count\")) +\n    \"}]\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 860,
+        "wires": [
+            [
+                "372f0bcf91ada37b"
+            ]
+        ]
+    },
+    {
+        "id": "51e46d25ee7364b8",
+        "type": "function",
+        "z": "69f2cb50737a4933",
+        "name": "[{\"function\":\"analogWrite\",\"pin\":5,\"value\": <msg.payload>}]",
+        "func": "let val = msg.payload;\nmsg.payload = \"[{\\\"function\\\":\\\"analogWrite\\\",\\\"pin\\\":5,\\\"value\\\":\" + val + \"}]\";\nglobal.led_b = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 280,
+        "wires": [
+            [
+                "21a264cfcb0c74c6"
+            ]
+        ]
+    },
+    {
+        "id": "f7fdc2b05b63f70a",
+        "type": "mqtt out",
+        "z": "69f2cb50737a4933",
+        "name": "esp1/in",
+        "topic": "esp1/in",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b588965e00983323",
+        "x": 1180,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "d289ec4343267a6a",
+        "type": "comment",
+        "z": "69f2cb50737a4933",
+        "name": "analogWrite(pin, value)",
+        "info": "analogWrite(pin, value) \nimplemented as:\n{\n    \"cmd\": \"AW\",\n    \"gpio\": gpio number (for example 5),\n    \"value\": int value (0-255)\n}",
+        "x": 160,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "142fb8be3f6a68b6",
+        "type": "mqtt in",
+        "z": "69f2cb50737a4933",
+        "name": "",
+        "topic": "esp1/ready",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "b588965e00983323",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 320,
+        "y": 60,
+        "wires": [
+            [
+                "91f939e8ec44fa3e"
+            ]
+        ]
+    },
+    {
+        "id": "c3a746d7318162ae",
+        "type": "mqtt out",
+        "z": "69f2cb50737a4933",
+        "name": "esp1/in",
+        "topic": "esp1/in",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b588965e00983323",
+        "x": 1260,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "6c3e080b63c03949",
+        "type": "comment",
+        "z": "69f2cb50737a4933",
+        "name": "Enable/Disable input Interrupt on pin D2 (GPIO4) ",
+        "info": "",
+        "x": 200,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "452d5d8fe0f30a5e",
+        "type": "function",
+        "z": "69f2cb50737a4933",
+        "name": "Toggle state function",
+        "func": "/*let debounce_time = 100;\n\nif (flow.btnstate == undefined) {\n    flow.btnstate = true;\n    flow.lasttime = Date.now();\n} else if (Date.now() - flow.lasttime > debounce_time) {\n    flow.lasttime = Date.now();\n    if (flow.btnstate == false) {\n        flow.btnstate = true;\n    } else {\n        flow.btnstate = false;\n    }\n}\n\nmsg.payload = flow.btnstate;\nreturn msg;\n*/\n\n\nif (flow.btnstate == undefined) {\n        flow.btnstate = false;\n    } else {\n        flow.btnstate = !flow.btnstate;\n    }\n\nmsg.payload = flow.btnstate;\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 760,
+        "wires": [
+            [
+                "f9d27c348d24759f"
+            ]
+        ]
+    },
+    {
+        "id": "b796a326e8d23a50",
+        "type": "mqtt in",
+        "z": "69f2cb50737a4933",
+        "name": "",
+        "topic": "esp1/int",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "b588965e00983323",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 760,
+        "wires": [
+            [
+                "452d5d8fe0f30a5e",
+                "7222d09a32ab9747"
+            ]
+        ]
+    },
+    {
+        "id": "73c809f69622820c",
+        "type": "comment",
+        "z": "69f2cb50737a4933",
+        "name": "interrupt callback",
+        "info": "",
+        "x": 100,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "21a264cfcb0c74c6",
+        "type": "subflow:208e991693e179cb",
+        "z": "69f2cb50737a4933",
+        "name": "",
+        "x": 1000,
+        "y": 280,
+        "wires": [
+            [
+                "f7fdc2b05b63f70a"
+            ]
+        ]
+    },
+    {
+        "id": "2aa65cdfc5757bfc",
+        "type": "comment",
+        "z": "69f2cb50737a4933",
+        "name": "setup",
+        "info": "",
+        "x": 90,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "91f939e8ec44fa3e",
+        "type": "function",
+        "z": "69f2cb50737a4933",
+        "name": "Setup",
+        "func": "msg.payload = JSON.stringify([\n\n    {\n        \"function\": \"pinMode\",\n        \"pin\": 5,\n        \"mode\": 1      //output\n    },\n    {\n        \"function\": \"pinMode\",\n        \"pin\": 4,\n        \"mode\": 2      //input pullup\n    }\n]);\n \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 60,
+        "wires": [
+            [
+                "7e63dd29d16e6b3a"
+            ]
+        ]
+    },
+    {
+        "id": "9d0183e9f6985d7c",
+        "type": "inject",
+        "z": "69f2cb50737a4933",
+        "name": "send setup",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 320,
+        "y": 120,
+        "wires": [
+            [
+                "91f939e8ec44fa3e"
+            ]
+        ]
+    },
+    {
+        "id": "7e63dd29d16e6b3a",
+        "type": "subflow:208e991693e179cb",
+        "z": "69f2cb50737a4933",
+        "name": "",
+        "x": 980,
+        "y": 60,
+        "wires": [
+            [
+                "91f75b6700e63386"
+            ]
+        ]
+    },
+    {
+        "id": "91f75b6700e63386",
+        "type": "mqtt out",
+        "z": "69f2cb50737a4933",
+        "name": "esp1/in",
+        "topic": "esp1/in",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b588965e00983323",
+        "x": 1160,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "4acba4d015f1fe3a",
+        "type": "subflow:208e991693e179cb",
+        "z": "69f2cb50737a4933",
+        "name": "",
+        "x": 1040,
+        "y": 580,
+        "wires": [
+            [
+                "c3a746d7318162ae"
+            ]
+        ]
+    },
+    {
+        "id": "7222d09a32ab9747",
+        "type": "debug",
+        "z": "69f2cb50737a4933",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 360,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "d6d1f62021c3fbbf",
+        "type": "switch",
+        "z": "69f2cb50737a4933",
+        "name": "Interrupt type switch",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 320,
+        "y": 560,
+        "wires": [
+            [
+                "ada3245dcdbf0910"
+            ],
+            [
+                "7d303f05d1e71eb8"
+            ],
+            [
+                "ed71b498b375f537"
+            ],
+            [
+                "d26b66bd70f95f45"
+            ]
+        ]
+    },
+    {
+        "id": "ada3245dcdbf0910",
+        "type": "function",
+        "z": "69f2cb50737a4933",
+        "name": "Interrupt enable change",
+        "func": "msg.payload = msg.payload = JSON.stringify([\n    {\n        \"function\":\"attachDebounceInterrupt\",\n        \"pin\":4,\n        \"mode\":3\n     }\n     ]);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 500,
+        "wires": [
+            [
+                "4acba4d015f1fe3a"
+            ]
+        ]
+    },
+    {
+        "id": "7d303f05d1e71eb8",
+        "type": "function",
+        "z": "69f2cb50737a4933",
+        "name": "Interrupt enable rising",
+        "func": "msg.payload = msg.payload = JSON.stringify([\n    {\n        \"function\":\"attachDebounceInterrupt\",\n        \"pin\":4,\n        \"mode\":1\n     }\n     ]);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 560,
+        "wires": [
+            [
+                "4acba4d015f1fe3a"
+            ]
+        ]
+    },
+    {
+        "id": "ed71b498b375f537",
+        "type": "function",
+        "z": "69f2cb50737a4933",
+        "name": "Interrupt enable falling",
+        "func": "msg.payload = msg.payload = JSON.stringify([\n    {\n        \"function\":\"attachDebounceInterrupt\",\n        \"pin\":4,\n        \"mode\":2\n     }\n     ]);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 620,
+        "wires": [
+            [
+                "4acba4d015f1fe3a"
+            ]
+        ]
+    },
+    {
+        "id": "d26b66bd70f95f45",
+        "type": "function",
+        "z": "69f2cb50737a4933",
+        "name": "interrupt disable",
+        "func": "msg.payload = msg.payload = JSON.stringify([\n    {\n        \"function\":\"detachInterrupt\",\n        \"pin\":4\n     }\n     ]);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 680,
+        "wires": [
+            [
+                "4acba4d015f1fe3a"
+            ]
+        ]
+    },
+    {
+        "id": "0c4a26e008f07da5",
+        "type": "ui-radio-group",
+        "z": "69f2cb50737a4933",
+        "group": "c4a855ffb0ea5084",
+        "name": "",
+        "label": "Select Option:",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "columns": 1,
+        "passthru": false,
+        "options": [
+            {
+                "label": "on change edge",
+                "value": 0,
+                "type": "num"
+            },
+            {
+                "label": "on rising edge",
+                "value": 1,
+                "type": "num"
+            },
+            {
+                "label": "on falling edge",
+                "value": 2,
+                "type": "num"
+            },
+            {
+                "label": "deactivated",
+                "value": "3",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "payload",
+        "topicType": "msg",
+        "className": "",
+        "x": 120,
+        "y": 560,
+        "wires": [
+            [
+                "d6d1f62021c3fbbf"
+            ]
+        ]
+    },
+    {
+        "id": "ec6fcd280b029186",
+        "type": "ui-slider",
+        "z": "69f2cb50737a4933",
+        "group": "76c874f2247ebb66",
+        "name": "Led B",
+        "label": "slider",
+        "tooltip": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "thumbLabel": "true",
+        "showTicks": "always",
+        "min": "15",
+        "max": "255",
+        "step": "25",
+        "className": "",
+        "iconPrepend": "",
+        "iconAppend": "",
+        "color": "",
+        "colorTrack": "",
+        "colorThumb": "",
+        "showTextField": false,
+        "x": 370,
+        "y": 280,
+        "wires": [
+            [
+                "51e46d25ee7364b8"
+            ]
+        ]
+    },
+    {
+        "id": "f9d27c348d24759f",
+        "type": "ui-led",
+        "z": "69f2cb50737a4933",
+        "name": "showed the toggled state",
+        "group": "610328e23a5c02bc",
+        "order": 1,
+        "width": "2",
+        "height": "2",
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "flex-end",
+        "states": [
+            {
+                "value": "false",
+                "valueType": "bool",
+                "color": "#e2d112"
+            },
+            {
+                "value": "true",
+                "valueType": "bool",
+                "color": "#51d908"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showBorder": false,
+        "showGlow": true,
+        "x": 1010,
+        "y": 760,
+        "wires": []
+    }
+]
