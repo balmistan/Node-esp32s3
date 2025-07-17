@@ -4,16 +4,16 @@
 #include <string.h>
 
 static const char *TAG = "MQTT_UTILS";
-
-#define PM 0
-#define DR 1
-#define DW 2
-#define AW 3
-#define AI 4
-#define DI 5
-#define DT 6
-#define PING 7
-#define ADI 8
+#define RST 0 // reset software
+#define PM 1 // pinMode
+#define DR 2 // digitalRead
+#define DW 3 // digitalWrite
+#define AW 4 // analogWrite
+#define AI 5 // attachInterrupt
+#define DI 6 // detacheInzerrupt
+#define DT 7 // digitalToggle
+#define PING 8 // mqtt ping
+#define ADI 9 // attachdebounceInterrupt
 
 uint8_t offset = 48;
 
