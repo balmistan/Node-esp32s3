@@ -1,6 +1,7 @@
 #include "arduino_wrapper.h"
 #include "mqtt_utils.h"
 #include "esp_log.h"
+#include "esp_system.h"
 #include <string.h>
 
 static const char *TAG = "MQTT_UTILS";
@@ -60,34 +61,39 @@ void commands(char *receved_msg)
     bool exit_on_error=false;
     do{
       cmd = (uint8_t)receved_msg[i] - offset;
+      ESP_LOGI(TAG, "   > command: %d ", cmd);
       switch(cmd){
-        case PM:  
-          pin = ((gpio_num_t)receved_msg[i+1]) - offset;                                                                                //pinMode(pin, mode);
-          mode = ((int)receved_msg[i+2] - offset) >> 2;
+        case RST:
+         ESP_LOGI(TAG, "   > restart!");
+          esp_restart();  // There is no need to do anything else, because the microcontroller will be restarted.
+          break;  
+        case PM:  //pinMode(pin, mode);
+          pin = ((gpio_num_t)receved_msg[i+1]) - offset;                                                                                
+          mode = ((uint8_t)receved_msg[i+2] - offset) >> 2;
           pinMode(pin, mode);
           i+=3;
           break;
-        case DW:  
-          pin = ((gpio_num_t)receved_msg[i+1]) - offset;                                                                                //digitalWrite(pin, value);
+        case DW:  //digitalWrite(pin, value);
+          pin = ((gpio_num_t)receved_msg[i+1]) - offset;                                                                                
           value = ((uint8_t)receved_msg[i+2] - offset) & 0x01;
           digitalWrite(pin, value);
           i+=3;
           break;
-          case AW:  
-          pin = ((gpio_num_t)receved_msg[i+1]) - offset;                                                                                //analogWrite(pin, value);
+          case AW:  //analogWrite(pin, value);
+          pin = ((gpio_num_t)receved_msg[i+1]) - offset;                                                                                
           value = (receved_msg[i+2] - offset) & 0x03;
           value = value | (((uint8_t)receved_msg[i+3] - offset) << 2);
-          analogWrite(pin, value);
+          analogWrite(pin, (uint16_t)value);
           i+=4;
           break;
-    /*    case AI:                                                                                                                      //attachInterrupt(pin, mode);
+    /*    case AI:  //attachInterrupt(pin, mode);                                                                                                                    
           pin = ((uint8_t)receved_msg[i+1]) - offset;            
           mode = (((uint8_t)receved_msg[i+2]) - offset)>>2;
           interrupt_enable(pin, mode, 0);
           snprintf(debug_msg, sizeof(debug_msg), "> attachInterrupt(%d, %d)", pin, mode);
           i+=3;
           break;
-        case DI:                                                                                                                      //detachInterrupt(pin, mode);
+        case DI: //detachInterrupt(pin, mode);                                                                                                                     
           pin = ((uint8_t)receved_msg[i+1]) - offset;             
           interrupt_disable(pin);
           snprintf(debug_msg, sizeof(debug_msg), "> detachInterrupt(%d)", pin);
@@ -97,7 +103,7 @@ void commands(char *receved_msg)
           mqtt_send("ping", "pong");
           i+=1;
           break;
-        case ADI:                                                                                                                       //attachDebounceInterrupt(pin, mode);
+        case ADI: //attachDebounceInterrupt(pin, mode);                                                                                                                      
           pin = ((uint8_t)receved_msg[i+1]) - offset;            
           mode = (((uint8_t)receved_msg[i+2]) - offset)>>2;
           interrupt_enable(pin, mode, 20);

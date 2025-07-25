@@ -5,7 +5,14 @@
 
 static const char *TAG = "ARDUINO_WRAPPER";
 
-void pinMode(gpio_num_t pin, int mode)
+// for analogWrite ///////////////
+bool is_analog_initialized = false;
+uint8_t used_channels = 0;
+gpio_num_t configured_gpios[8];
+
+/////////////////////////////////
+
+void pinMode(gpio_num_t pin, uint8_t mode)
 {
     ESP_LOGI(TAG, "   > pinMode(%d, %d)", pin, mode);
     gpio_config_t io_conf = {
@@ -35,8 +42,8 @@ void pinMode(gpio_num_t pin, int mode)
 
 void digitalWrite(gpio_num_t pin, uint8_t level)
 {
-    level = (level == 0) ? 0 : 255;
-    analogWrite(pin, level);
+    pinMode(pin, OUTPUT);
+    gpio_set_level(pin, level);
     ESP_LOGI(TAG, "   > digitalWrite(%d, %d)", pin, level);
 }
 
@@ -45,35 +52,57 @@ int digitalRead(gpio_num_t pin)
     return gpio_get_level(pin);
 }
 
-void analogWrite(gpio_num_t pin, uint8_t value)
+void analogWrite(gpio_num_t pin, uint16_t value)
 {
+uint8_t ch_index=0;
 
     ESP_LOGI(TAG, "   > analogWrite(%d, %d)", pin, value);
 
-    // PWM resolution: 8 bits -> values from 0 to 255
-    const int freq = 1000;
-    const ledc_channel_t channel = LEDC_CHANNEL_0;
-    const ledc_timer_t timer = LEDC_TIMER_0;
-    const ledc_mode_t mode = LEDC_LOW_SPEED_MODE;
-    const ledc_timer_bit_t resolution = LEDC_TIMER_12_BIT; //LEDC_TIMER_8_BIT;
+    if (!is_analog_initialized)
+    {
+        // PWM resolution: 13 bits -> values from 0 to 8191. Duty cicle step: ca 0,0122%
 
-    // Configure timer (only once per timer)
-    ledc_timer_config_t ledc_timer = {
-        .speed_mode = mode,
-        .timer_num = timer,
-        .duty_resolution = resolution,
-        .freq_hz = freq,
-        .clk_cfg = LEDC_AUTO_CLK};
-    ledc_timer_config(&ledc_timer);
+        ledc_timer_config_t ledc_timer = {
+            .speed_mode = LEDC_LOW_SPEED_MODE,
+            .timer_num = LEDC_TIMER_0,
+            .duty_resolution = LEDC_TIMER_13_BIT,
+            .freq_hz = 10000,
+            .clk_cfg = LEDC_AUTO_CLK};
+        ledc_timer_config(&ledc_timer);
+        is_analog_initialized = true;
+    }
 
+    if (used_channels == 4)
+    {
+        ESP_LOGE(TAG, "No analog  outputs available. Maximum 8 already used!");
+    }
+    else
+    {
+        // I check if the GPIO is already configured as analog
+        bool is_configured = false;
+        
+        for (ch_index = 0; ch_index < used_channels; ch_index++)
+        {
+            if (configured_gpios[ch_index] == pin)
+            {
+                is_configured = true;
+                break;
+            }
+        } // close for
+        if (!is_configured)
+        {
+            configured_gpios[ch_index] = pin;
+            used_channels++;
+        }
+    }
     // Configure channel
     ledc_channel_config_t ledc_channel = {
-        .speed_mode = mode,
-        .channel = channel,
-        .timer_sel = timer,
+        .speed_mode =  LEDC_LOW_SPEED_MODE,
+        .channel = ch_index,
+        .timer_sel = LEDC_TIMER_0,
         .intr_type = LEDC_INTR_DISABLE,
         .gpio_num = pin,
-        .duty = value, // Duty 0~255 for 8-bit resolution
+        .duty = value, 
         .hpoint = 0};
     ledc_channel_config(&ledc_channel);
 

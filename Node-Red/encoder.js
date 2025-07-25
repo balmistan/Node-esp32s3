@@ -8,8 +8,11 @@ var offset = 48;
 if(arr_in && arr_in.length >0){
     do{
         switch(arr_in[i]['function']){
+            case "reset":
+                str_out += String.fromCharCode(0+offset);   //0 is the code of reset's command
+                break;
             case "pinMode":
-                str_out += String.fromCharCode(1+offset);
+                str_out += String.fromCharCode(1+offset);   //1 is the code of pinMode's command
                 str_out += String.fromCharCode(arr_in[i]['pin'] + offset);   
                 str_out += String.fromCharCode( (arr_in[i]['mode'] << 2 ) + offset); 
                 break;
