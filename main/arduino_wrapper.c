@@ -55,6 +55,7 @@ int digitalRead(gpio_num_t pin)
 void analogWrite(gpio_num_t pin, uint16_t value)
 {
 uint8_t ch_index=0;
+const ledc_mode_t ledc_mode        = LEDC_LOW_SPEED_MODE;
 
     ESP_LOGI(TAG, "   > analogWrite(%d, %d)", pin, value);
 
@@ -63,7 +64,7 @@ uint8_t ch_index=0;
         // PWM resolution: 13 bits -> values from 0 to 8191. Duty cicle step: ca 0,0122%
 
         ledc_timer_config_t ledc_timer = {
-            .speed_mode = LEDC_LOW_SPEED_MODE,
+            .speed_mode = ledc_mode,
             .timer_num = LEDC_TIMER_0,
             .duty_resolution = LEDC_TIMER_13_BIT,
             .freq_hz = 10000,
@@ -97,16 +98,17 @@ uint8_t ch_index=0;
     }
     // Configure channel
     ledc_channel_config_t ledc_channel = {
-        .speed_mode =  LEDC_LOW_SPEED_MODE,
+        .speed_mode =  ledc_mode,
         .channel = ch_index,
         .timer_sel = LEDC_TIMER_0,
         .intr_type = LEDC_INTR_DISABLE,
         .gpio_num = pin,
         .duty = value, 
-        .hpoint = 0};
+        .hpoint = 0
+    };
     ledc_channel_config(&ledc_channel);
 
     // Update duty cycle
-    ledc_set_duty(mode, channel, value);
-    ledc_update_duty(mode, channel);
+    ledc_set_duty(ledc_mode, ch_index, value);
+    ledc_update_duty(ledc_mode, ch_index);
 }
