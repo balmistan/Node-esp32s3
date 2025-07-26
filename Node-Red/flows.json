@@ -1,13 +1,5 @@
 [
     {
-        "id": "d4fdf6bb2a345898",
-        "type": "tab",
-        "label": "Flow 1",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "bbe3ae4f9ae51c8f",
         "type": "tab",
         "label": "Led_1 ON/OFF",
@@ -16,9 +8,9 @@
         "env": []
     },
     {
-        "id": "10392be039c9d1b1",
+        "id": "420b94f0a22653c6",
         "type": "tab",
-        "label": "LED_1 Analog",
+        "label": "Dimmer",
         "disabled": false,
         "info": "",
         "env": []
@@ -27,7 +19,7 @@
         "id": "69f2cb50737a4933",
         "type": "tab",
         "label": "NodeMCU Control",
-        "disabled": false,
+        "disabled": true,
         "info": "",
         "env": []
     },
@@ -130,7 +122,7 @@
         "id": "b588965e00983323",
         "type": "mqtt-broker",
         "name": "Smartphone",
-        "broker": "192.168.96.90",
+        "broker": "192.168.3.90",
         "port": "1883",
         "clientid": "",
         "autoConnect": true,
@@ -160,7 +152,7 @@
     {
         "id": "0873338bcdee1b7b",
         "type": "ui-base",
-        "name": "My Dashboard",
+        "name": "My Dashboard Analog",
         "path": "/dashboard",
         "appIcon": "",
         "includeClientData": true,
@@ -169,8 +161,32 @@
             "ui-control"
         ],
         "showPathInSidebar": false,
+        "headerContent": "page",
         "navigationStyle": "default",
-        "titleBarStyle": "default"
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 5,
+        "showDisconnectNotification": true,
+        "allowInstall": true
+    },
+    {
+        "id": "c6da207e1b8e3ae2",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
     },
     {
         "id": "b15b699a7236d086",
@@ -203,7 +219,7 @@
                 "cols": "12"
             }
         ],
-        "order": 1,
+        "order": 3,
         "className": "",
         "visible": "true",
         "disabled": "false"
@@ -251,30 +267,136 @@
         "groupType": "default"
     },
     {
-        "id": "c6da207e1b8e3ae2",
-        "type": "ui-theme",
-        "name": "Default Theme",
-        "colors": {
-            "surface": "#ffffff",
-            "primary": "#0094CE",
-            "bgPage": "#eeeeee",
-            "groupBg": "#ffffff",
-            "groupOutline": "#cccccc"
-        },
-        "sizes": {
-            "density": "default",
-            "pagePadding": "12px",
-            "groupGap": "12px",
-            "groupBorderRadius": "4px",
-            "widgetGap": "12px"
-        }
+        "id": "ca6d2391fae9a56c",
+        "type": "ui-page",
+        "name": "Dimmer",
+        "ui": "0873338bcdee1b7b",
+        "path": "/page2",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "c6da207e1b8e3ae2",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 2,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "fac5a7c777a39f73",
+        "type": "ui-group",
+        "name": "Led on GPIO5",
+        "page": "ca6d2391fae9a56c",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "7a8a3aeb4605050f",
+        "type": "ui-page",
+        "name": "Led ON-OFF",
+        "ui": "0873338bcdee1b7b",
+        "path": "/page3",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "c6da207e1b8e3ae2",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "ca48bd94129141d6",
+        "type": "ui-group",
+        "name": "Led on GPIO6",
+        "page": "7a8a3aeb4605050f",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "0ec78eab1e8639d0",
+        "type": "ui-group",
+        "name": "Reset",
+        "page": "7a8a3aeb4605050f",
+        "width": 6,
+        "height": 1,
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "ecb416852e893a36",
+        "type": "ui-spacer",
+        "group": "ca48bd94129141d6",
+        "name": "Microcontroller reset software",
+        "tooltip": "",
+        "order": 3,
+        "width": 1,
+        "height": 1,
+        "className": ""
     },
     {
         "id": "ee0c94c383d65e67",
         "type": "function",
         "z": "208e991693e179cb",
         "name": "encoder",
-        "func": "\nvar str_out = \"\";\nvar arr_in = JSON.parse(msg.payload);\nvar i=0;\nvar tmp = \"\";\nvar offset = 48;\n\nif(arr_in && arr_in.length >0){\n    do{\n        switch(arr_in[i]['function']){\n            case \"pinMode\":\n                str_out += String.fromCharCode(0+offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);   \n                str_out += String.fromCharCode( (arr_in[i]['mode'] << 2 ) + offset); \n                break;\n            case \"digitalRead\":\n                str_out += String.fromCharCode(1+offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                break;\n            case \"digitalWrite\":\n                str_out += String.fromCharCode(2+offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode(arr_in[i]['value'] + offset);\n                break;\n            case \"analogWrite\":\n                str_out += String.fromCharCode(3 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode( (arr_in[i]['value'] & 0x03) + offset);\n                str_out += String.fromCharCode((arr_in[i]['value'] >> 2) + offset);\n                break;\n            case \"attachInterrupt\":\n                str_out += String.fromCharCode(4 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode((arr_in[i]['mode'] << 2) + offset);\n                break;\n            case \"detachInterrupt\":\n                str_out += String.fromCharCode(5 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                break;\n            case \"digitalToggle\":\n                str_out += String.fromCharCode(6 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                break;\n            case \"ping\":\n                str_out += String.fromCharCode(7 + offset);\n                break;\n            case \"attachDebounceInterrupt\":\n                str_out += String.fromCharCode(8 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode((arr_in[i]['mode'] << 2) + offset);\n                break;\n            default:\n                break;\n        }\n        i++\n    } while (i < arr_in.length);\n}\n\nmsg.payload = str_out;\n\nreturn msg;",
+        "func": "\nvar str_out = \"\";\nvar arr_in = JSON.parse(msg.payload);\nvar i=0;\nvar tmp = \"\";\nvar offset = 48;\n\nif(arr_in && arr_in.length >0){\n    do{\n        switch(arr_in[i]['function']){\n            case \"reset\":\n                str_out += String.fromCharCode(0+offset);   //0 is the code of reset's command\n                break;\n            case \"pinMode\":\n                str_out += String.fromCharCode(1+offset);   //1 is the code of pinMode's command\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);   \n                str_out += String.fromCharCode( (arr_in[i]['mode'] << 2 ) + offset); \n                break;\n            case \"digitalRead\":\n                str_out += String.fromCharCode(2+offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                break;\n            case \"digitalWrite\":\n                str_out += String.fromCharCode(3+offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode(arr_in[i]['value'] + offset);\n                break;\n            case \"analogWrite\":\n                str_out += String.fromCharCode(4 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode( (arr_in[i]['value'] & 0x03) + offset);\n                str_out += String.fromCharCode((arr_in[i]['value'] >> 2) + offset);\n                break;\n            case \"attachInterrupt\":\n                str_out += String.fromCharCode(5 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode((arr_in[i]['mode'] << 2) + offset);\n                break;\n            case \"detachInterrupt\":\n                str_out += String.fromCharCode(6 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                break;\n            case \"digitalToggle\":\n                str_out += String.fromCharCode(7 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                break;\n            case \"ping\":\n                str_out += String.fromCharCode(8 + offset);\n                break;\n            case \"attachDebounceInterrupt\":\n                str_out += String.fromCharCode(9 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode((arr_in[i]['mode'] << 2) + offset);\n                break;\n            default:\n                break;\n        }\n        i++\n    } while (i < arr_in.length);\n}\n\nmsg.payload = str_out;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -291,7 +413,7 @@
         "id": "b4d39950fa75e1d2",
         "type": "inject",
         "z": "bbe3ae4f9ae51c8f",
-        "name": "on 5",
+        "name": "on 6",
         "props": [
             {
                 "p": "payload"
@@ -306,9 +428,9 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "\"[{\\\"function\\\":\\\"digitalWrite\\\",\\\"pin\\\":5,\\\"value\\\":1}]\"",
+        "payload": "\"[{\\\"function\\\":\\\"digitalWrite\\\",\\\"pin\\\":6,\\\"value\\\":1}]\"",
         "payloadType": "json",
-        "x": 530,
+        "x": 170,
         "y": 240,
         "wires": [
             [
@@ -320,7 +442,7 @@
         "id": "e5092ea0eb4aa5d5",
         "type": "inject",
         "z": "bbe3ae4f9ae51c8f",
-        "name": "off 5",
+        "name": "off 6",
         "props": [
             {
                 "p": "payload"
@@ -335,9 +457,9 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "\"[{\\\"function\\\":\\\"digitalWrite\\\",\\\"pin\\\":5,\\\"value\\\":0}]\"",
+        "payload": "\"[{\\\"function\\\":\\\"digitalWrite\\\",\\\"pin\\\":6,\\\"value\\\":0}]\"",
         "payloadType": "json",
-        "x": 530,
+        "x": 170,
         "y": 300,
         "wires": [
             [
@@ -358,60 +480,11 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 180,
-        "y": 60,
+        "x": 120,
+        "y": 80,
         "wires": [
             [
-                "c6e3dfddc38f804d"
-            ]
-        ]
-    },
-    {
-        "id": "c6e3dfddc38f804d",
-        "type": "function",
-        "z": "bbe3ae4f9ae51c8f",
-        "name": "setup",
-        "func": "\nmsg.payload = JSON.stringify([\n    {\n        \"function\": \"pinMode\",\n        \"pin\": 5,\n        \"mode\": 1\n    }\n]);\n \nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 410,
-        "y": 120,
-        "wires": [
-            [
-                "1c467d5b7f441483"
-            ]
-        ]
-    },
-    {
-        "id": "491ed68f8dce6096",
-        "type": "inject",
-        "z": "bbe3ae4f9ae51c8f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 150,
-        "y": 140,
-        "wires": [
-            [
-                "c6e3dfddc38f804d"
+                "bd59765191362f0b"
             ]
         ]
     },
@@ -420,8 +493,8 @@
         "type": "subflow:208e991693e179cb",
         "z": "bbe3ae4f9ae51c8f",
         "name": "",
-        "x": 840,
-        "y": 80,
+        "x": 460,
+        "y": 260,
         "wires": [
             [
                 "790a1f4e15a9391a"
@@ -442,17 +515,182 @@
         "correl": "",
         "expiry": "",
         "broker": "b588965e00983323",
-        "x": 1060,
-        "y": 80,
+        "x": 680,
+        "y": 260,
         "wires": []
     },
     {
-        "id": "7b7e46ec1a0c3394",
+        "id": "bd59765191362f0b",
+        "type": "debug",
+        "z": "bbe3ae4f9ae51c8f",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 360,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "a8912164f0362c22",
+        "type": "ui-button",
+        "z": "bbe3ae4f9ae51c8f",
+        "group": "ca48bd94129141d6",
+        "name": "Led ON",
+        "label": "Led ON",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "\"[{\\\"function\\\":\\\"digitalWrite\\\",\\\"pin\\\":6,\\\"value\\\":1}]\"",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 200,
+        "y": 420,
+        "wires": [
+            [
+                "1c467d5b7f441483",
+                "a75c46e0ceacca72"
+            ]
+        ]
+    },
+    {
+        "id": "b2d8d53c0a289227",
+        "type": "ui-button",
+        "z": "bbe3ae4f9ae51c8f",
+        "group": "ca48bd94129141d6",
+        "name": "Led OFF",
+        "label": "Led OFF",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "\"[{\\\"function\\\":\\\"digitalWrite\\\",\\\"pin\\\":6,\\\"value\\\":0}]\"",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 200,
+        "y": 500,
+        "wires": [
+            [
+                "1c467d5b7f441483",
+                "a75c46e0ceacca72"
+            ]
+        ]
+    },
+    {
+        "id": "a75c46e0ceacca72",
+        "type": "debug",
+        "z": "bbe3ae4f9ae51c8f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "0cb04c0809da8e0e",
+        "type": "ui-button",
+        "z": "bbe3ae4f9ae51c8f",
+        "group": "0ec78eab1e8639d0",
+        "name": "microcontroller reset",
+        "label": "microcontroller reset",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "\"[{\\\"function\\\":\\\"reset\\\"}]\"",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 260,
+        "y": 660,
+        "wires": [
+            [
+                "09963eed65b33fe0"
+            ]
+        ]
+    },
+    {
+        "id": "09963eed65b33fe0",
+        "type": "subflow:208e991693e179cb",
+        "z": "bbe3ae4f9ae51c8f",
+        "name": "",
+        "x": 480,
+        "y": 660,
+        "wires": [
+            [
+                "3a78522010606eb4",
+                "f2947fae6a979622"
+            ]
+        ]
+    },
+    {
+        "id": "3a78522010606eb4",
         "type": "mqtt out",
-        "z": "10392be039c9d1b1",
-        "name": "esp1/in",
+        "z": "bbe3ae4f9ae51c8f",
+        "name": "",
         "topic": "esp1/in",
-        "qos": "",
+        "qos": "0",
         "retain": "",
         "respTopic": "",
         "contentType": "",
@@ -460,294 +698,111 @@
         "correl": "",
         "expiry": "",
         "broker": "b588965e00983323",
-        "x": 1060,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "1c1414db87639320",
-        "type": "inject",
-        "z": "10392be039c9d1b1",
-        "name": "OFF-Led_1",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "\"[{\\\"function\\\":\\\"digitalWrite\\\",\\\"pin\\\":5,\\\"value\\\":0}]\"",
-        "payloadType": "json",
-        "x": 410,
-        "y": 460,
-        "wires": [
-            [
-                "372f0bcf91ada37b"
-            ]
-        ]
-    },
-    {
-        "id": "340f8a3780dc2fa9",
-        "type": "inject",
-        "z": "10392be039c9d1b1",
-        "name": "ON-Led_1",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "\"[{\\\"function\\\":\\\"digitalWrite\\\",\\\"pin\\\":5,\\\"value\\\":1}]\"",
-        "payloadType": "json",
-        "x": 400,
-        "y": 400,
-        "wires": [
-            [
-                "372f0bcf91ada37b"
-            ]
-        ]
-    },
-    {
-        "id": "8fdc45f99e419078",
-        "type": "inject",
-        "z": "10392be039c9d1b1",
-        "name": "Analog Led 1 (100)",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "\"[{\\\"function\\\":\\\"analogWrite\\\",\\\"pin\\\":5,\\\"value\\\":100}]\"",
-        "payloadType": "json",
-        "x": 450,
-        "y": 640,
-        "wires": [
-            [
-                "372f0bcf91ada37b"
-            ]
-        ]
-    },
-    {
-        "id": "1e2824570dc5291d",
-        "type": "inject",
-        "z": "10392be039c9d1b1",
-        "name": "Analog Led 1 (250)",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "\"[{\\\"function\\\":\\\"analogWrite\\\",\\\"pin\\\":5,\\\"value\\\":250}]\"",
-        "payloadType": "json",
-        "x": 430,
-        "y": 740,
-        "wires": [
-            [
-                "372f0bcf91ada37b"
-            ]
-        ]
-    },
-    {
-        "id": "b40b09bb04d59da9",
-        "type": "comment",
-        "z": "10392be039c9d1b1",
-        "name": "digitalWrite(pin,value)",
-        "info": "digitalWrite(pin, value) \nimplemented as:\n{\n    \"cmd\": \"DW\",\n    \"gpio\": gpio number (for example 16),\n    \"value\": logic value (1 or 0)\n}",
-        "x": 180,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "51049e70383b26a6",
-        "type": "comment",
-        "z": "10392be039c9d1b1",
-        "name": "analogWrite(pin, value)",
-        "info": "analogWrite(pin, value) \nimplemented as:\n{\n    \"cmd\": \"AW\",\n    \"gpio\": gpio number (for example 5),\n    \"value\": int value (0-255)\n}",
-        "x": 180,
+        "x": 680,
         "y": 660,
         "wires": []
     },
     {
-        "id": "372f0bcf91ada37b",
-        "type": "subflow:208e991693e179cb",
-        "z": "10392be039c9d1b1",
-        "name": "",
-        "x": 860,
-        "y": 500,
-        "wires": [
-            [
-                "7b7e46ec1a0c3394",
-                "5ecf58efd5e4b38e"
-            ]
-        ]
-    },
-    {
-        "id": "0f3505ce22dcdbd3",
-        "type": "mqtt in",
-        "z": "10392be039c9d1b1",
-        "name": "",
-        "topic": "esp1/ready",
-        "qos": "0",
-        "datatype": "auto-detect",
-        "broker": "b588965e00983323",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 200,
-        "y": 100,
-        "wires": [
-            [
-                "7bcc69f824b10d44"
-            ]
-        ]
-    },
-    {
-        "id": "7bcc69f824b10d44",
-        "type": "function",
-        "z": "10392be039c9d1b1",
-        "name": "setup",
-        "func": "\nmsg.payload = JSON.stringify([\n    {\n        \"function\": \"pinMode\",\n        \"pin\": 5,\n        \"mode\": 1\n    }\n]);\n \nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 390,
-        "y": 140,
-        "wires": [
-            [
-                "372f0bcf91ada37b"
-            ]
-        ]
-    },
-    {
-        "id": "9b5f785b250e7dbb",
-        "type": "inject",
-        "z": "10392be039c9d1b1",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 170,
-        "y": 180,
-        "wires": [
-            [
-                "7bcc69f824b10d44"
-            ]
-        ]
-    },
-    {
-        "id": "5ecf58efd5e4b38e",
+        "id": "f2947fae6a979622",
         "type": "debug",
-        "z": "10392be039c9d1b1",
-        "name": "debug 5",
-        "active": false,
+        "z": "bbe3ae4f9ae51c8f",
+        "name": "debug 4",
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1040,
-        "y": 360,
+        "x": 700,
+        "y": 560,
         "wires": []
     },
     {
-        "id": "18d0a4b839a932dd",
-        "type": "inject",
-        "z": "10392be039c9d1b1",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 340,
-        "y": 940,
+        "id": "15e1ab3e16800248",
+        "type": "ui-slider",
+        "z": "420b94f0a22653c6",
+        "group": "fac5a7c777a39f73",
+        "name": "dimmer 1",
+        "label": "slider",
+        "tooltip": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "thumbLabel": "true",
+        "showTicks": "always",
+        "min": 0,
+        "max": "255",
+        "step": 1,
+        "className": "",
+        "iconPrepend": "",
+        "iconAppend": "",
+        "color": "",
+        "colorTrack": "",
+        "colorThumb": "",
+        "showTextField": false,
+        "x": 140,
+        "y": 200,
         "wires": [
             [
-                "e7c61f3499a65369"
+                "49e1e60b858a638b"
             ]
         ]
     },
     {
-        "id": "e7c61f3499a65369",
+        "id": "49e1e60b858a638b",
         "type": "function",
-        "z": "10392be039c9d1b1",
-        "name": "function 1",
-        "func": "\nvar mult = 1;\nif(global.get(\"count\") === undefined){\n    global.set(\"count\", 5);\n} else if (global.get(\"count\")<=245){\n    global.set(\"count\", 45+global.get(\"count\"));\n}else{\n    global.set(\"count\", 5);\n}\n\n\n\n\n\n\n\n\nmsg.payload = \"[{\"+\n    \"\\\"function\\\":\\\"analogWrite\\\",\\\"pin\\\":5,\\\"value\\\":\" + global.get(\"count\") +\n    \"},{\\\"function\\\":\\\"analogWrite\\\",\\\"pin\\\":4,\\\"value\\\":\" + (255-global.get(\"count\")) +\n    \"}]\";\n\nreturn msg;",
+        "z": "420b94f0a22653c6",
+        "name": "[{\"function\":\"analogWrite\",\"pin\":5,\"value\": <msg.payload>}]",
+        "func": "let val = msg.payload;\nmsg.payload = \"[{\\\"function\\\":\\\"analogWrite\\\",\\\"pin\\\":5,\\\"value\\\":\" + val + \"}]\";\nglobal.led_b = msg.payload;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 580,
-        "y": 860,
+        "x": 450,
+        "y": 200,
         "wires": [
             [
-                "372f0bcf91ada37b"
+                "2732638904414956"
             ]
         ]
+    },
+    {
+        "id": "2732638904414956",
+        "type": "subflow:208e991693e179cb",
+        "z": "420b94f0a22653c6",
+        "name": "",
+        "x": 760,
+        "y": 200,
+        "wires": [
+            [
+                "fcfd8e200caa5f31"
+            ]
+        ]
+    },
+    {
+        "id": "fcfd8e200caa5f31",
+        "type": "mqtt out",
+        "z": "420b94f0a22653c6",
+        "name": "esp1/in",
+        "topic": "esp1/in",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b588965e00983323",
+        "x": 940,
+        "y": 200,
+        "wires": []
     },
     {
         "id": "51e46d25ee7364b8",
@@ -762,7 +817,7 @@
         "finalize": "",
         "libs": [],
         "x": 670,
-        "y": 280,
+        "y": 380,
         "wires": [
             [
                 "21a264cfcb0c74c6"
@@ -784,7 +839,7 @@
         "expiry": "",
         "broker": "b588965e00983323",
         "x": 1180,
-        "y": 280,
+        "y": 380,
         "wires": []
     },
     {
@@ -794,7 +849,7 @@
         "name": "analogWrite(pin, value)",
         "info": "analogWrite(pin, value) \nimplemented as:\n{\n    \"cmd\": \"AW\",\n    \"gpio\": gpio number (for example 5),\n    \"value\": int value (0-255)\n}",
         "x": 160,
-        "y": 280,
+        "y": 380,
         "wires": []
     },
     {
@@ -904,7 +959,7 @@
         "z": "69f2cb50737a4933",
         "name": "",
         "x": 1000,
-        "y": 280,
+        "y": 380,
         "wires": [
             [
                 "f7fdc2b05b63f70a"
@@ -926,7 +981,7 @@
         "type": "function",
         "z": "69f2cb50737a4933",
         "name": "Setup",
-        "func": "msg.payload = JSON.stringify([\n\n    {\n        \"function\": \"pinMode\",\n        \"pin\": 5,\n        \"mode\": 1      //output\n    },\n    {\n        \"function\": \"pinMode\",\n        \"pin\": 4,\n        \"mode\": 2      //input pullup\n    }\n]);\n \nreturn msg;",
+        "func": "msg.payload = JSON.stringify([\n    {\n        \"function\": \"pinMode\",\n        \"pin\": 4,\n        \"mode\": 2      //input pullup\n    }\n]);\n \nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1095,7 +1150,8 @@
         "y": 500,
         "wires": [
             [
-                "4acba4d015f1fe3a"
+                "4acba4d015f1fe3a",
+                "0c140797f930df2b"
             ]
         ]
     },
@@ -1221,10 +1277,10 @@
         "topic": "topic",
         "topicType": "msg",
         "thumbLabel": "true",
-        "showTicks": "always",
-        "min": "15",
+        "showTicks": "false",
+        "min": "0",
         "max": "255",
-        "step": "25",
+        "step": "1",
         "className": "",
         "iconPrepend": "",
         "iconAppend": "",
@@ -1233,7 +1289,7 @@
         "colorThumb": "",
         "showTextField": false,
         "x": 370,
-        "y": 280,
+        "y": 380,
         "wires": [
             [
                 "51e46d25ee7364b8"
@@ -1270,6 +1326,22 @@
         "showGlow": true,
         "x": 1010,
         "y": 760,
+        "wires": []
+    },
+    {
+        "id": "0c140797f930df2b",
+        "type": "debug",
+        "z": "69f2cb50737a4933",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 460,
         "wires": []
     }
 ]
