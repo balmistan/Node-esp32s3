@@ -61,16 +61,17 @@ const ledc_mode_t ledc_mode        = LEDC_LOW_SPEED_MODE;
 
     if (!is_analog_initialized)
     {
-        // PWM resolution: 13 bits -> values from 0 to 8191. Duty cicle step: ca 0,0122%
+        // PWM resolution: 12 bits -> values from 0 to 4095. Duty cicle step: ca 0.024%
 
         ledc_timer_config_t ledc_timer = {
             .speed_mode = ledc_mode,
             .timer_num = LEDC_TIMER_0,
-            .duty_resolution = LEDC_TIMER_13_BIT,
+            .duty_resolution = LEDC_TIMER_12_BIT,
             .freq_hz = 10000,
             .clk_cfg = LEDC_AUTO_CLK};
         ledc_timer_config(&ledc_timer);
         is_analog_initialized = true;
+        ESP_LOGI(TAG, "timer 0 is configured!");
     }
 
     if (used_channels == 4)
@@ -106,9 +107,11 @@ const ledc_mode_t ledc_mode        = LEDC_LOW_SPEED_MODE;
         .duty = value, 
         .hpoint = 0
     };
+
     ledc_channel_config(&ledc_channel);
 
     // Update duty cycle
     ledc_set_duty(ledc_mode, ch_index, value);
     ledc_update_duty(ledc_mode, ch_index);
+    ESP_LOGI(TAG, "duty: %d    ch: %d", value, ch_index);
 }
