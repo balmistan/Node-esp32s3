@@ -54,6 +54,7 @@ void commands(char *receved_msg)
   uint8_t cmd=0;
   gpio_num_t pin=0;
   uint8_t value=0;
+  uint16_t value2=0;
   uint8_t mode=0;
   
 
@@ -84,7 +85,7 @@ void commands(char *receved_msg)
           value = (receved_msg[i+2] - offset) & 0x03;
           value = value | (((uint8_t)receved_msg[i+3] - offset) << 2);
           analogWrite(pin, (uint16_t)value);
-          i+=4;
+          i+=5;
           break;
     /*    case AI:  //attachInterrupt(pin, mode);                                                                                                                    
           pin = ((uint8_t)receved_msg[i+1]) - offset;            
