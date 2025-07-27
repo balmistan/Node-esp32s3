@@ -28,8 +28,9 @@ if(arr_in && arr_in.length >0){
             case "analogWrite":
                 str_out += String.fromCharCode(4 + offset);
                 str_out += String.fromCharCode(arr_in[i]['pin'] + offset);
-                str_out += String.fromCharCode( (arr_in[i]['value'] & 0x03) + offset);
-                str_out += String.fromCharCode((arr_in[i]['value'] >> 2) + offset);
+                str_out += String.fromCharCode( (arr_in[i]['value'] & 0x0003) + offset);
+                str_out += String.fromCharCode(((arr_in[i]['value'] >> 2)& 0x00FF) + offset);
+String.fromCharCode(((arr_in[i]['value'] >> 8) & 0x003F + offset);
                 break;
             case "attachInterrupt":
                 str_out += String.fromCharCode(5 + offset);
