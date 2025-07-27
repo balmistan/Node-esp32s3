@@ -86,7 +86,7 @@ void commands(char *receved_msg)
           value = value | (((uint8_t)receved_msg[i+3] - offset) << 2);
 
 value2 =  (((uint8_t)receved_msg[i+4] - offset) << 8);
-value2 = value2 | value
+value2 = value2 | value;
           analogWrite(pin,value2);
           i+=5;
           break;
