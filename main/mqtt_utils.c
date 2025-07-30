@@ -62,7 +62,7 @@ void commands(char *receved_msg)
     bool exit_on_error=false;
     do{
       cmd = (uint8_t)receved_msg[i] - offset;
-      ESP_LOGI(TAG, "   > command: %d ", cmd);
+      //ESP_LOGI(TAG, "   > command: %d ", cmd);
       switch(cmd){
         case RST:
          ESP_LOGI(TAG, "   > restart!");

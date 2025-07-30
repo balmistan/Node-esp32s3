@@ -113,5 +113,5 @@ const ledc_mode_t ledc_mode        = LEDC_LOW_SPEED_MODE;
     // Update duty cycle
     ledc_set_duty(ledc_mode, ch_index, value);
     ledc_update_duty(ledc_mode, ch_index);
-    ESP_LOGI(TAG, "duty: %d    ch: %d", value, ch_index);
+    //ESP_LOGI(TAG, "duty: %d    ch: %d", value, ch_index);
 }

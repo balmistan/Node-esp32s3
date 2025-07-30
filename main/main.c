@@ -90,12 +90,14 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
 
         char topic_sub[64];
         char topic_pub[64];
+        char topic_ready_msg[64];
 
         snprintf(topic_sub, sizeof(topic_sub), "%s/in", DEVICE_NAME);
         snprintf(topic_pub, sizeof(topic_pub), "%s/out", DEVICE_NAME);
+        snprintf(topic_ready_msg, sizeof(topic_ready_msg), "%s/in/ready", DEVICE_NAME);
 
         esp_mqtt_client_subscribe(client, topic_sub, 1);
-        mqtt_publish_message(client, topic_pub, "MQTT5 test message");
+        mqtt_publish_message(client, topic_ready_msg, "Ready!");
         break;
     }
 

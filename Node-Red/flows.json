@@ -307,7 +307,7 @@
         "type": "ui-group",
         "name": "Led on GPIO5",
         "page": "ca6d2391fae9a56c",
-        "width": 6,
+        "width": "20",
         "height": 1,
         "order": 1,
         "showTitle": true,
@@ -396,7 +396,7 @@
         "type": "function",
         "z": "208e991693e179cb",
         "name": "encoder",
-        "func": "\nvar str_out = \"\";\nvar arr_in = JSON.parse(msg.payload);\nvar i=0;\nvar tmp = \"\";\nvar offset = 48;\n\nif(arr_in && arr_in.length >0){\n    do{\n        switch(arr_in[i]['function']){\n            case \"reset\":\n                str_out += String.fromCharCode(0+offset);   //0 is the code of reset's command\n                break;\n            case \"pinMode\":\n                str_out += String.fromCharCode(1+offset);   //1 is the code of pinMode's command\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);   \n                str_out += String.fromCharCode( (arr_in[i]['mode'] << 2 ) + offset); \n                break;\n            case \"digitalRead\":\n                str_out += String.fromCharCode(2+offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                break;\n            case \"digitalWrite\":\n                str_out += String.fromCharCode(3+offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode(arr_in[i]['value'] + offset);\n                break;\n            case \"analogWrite\":\n                str_out += String.fromCharCode(4 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode( (arr_in[i]['value'] & 0x03) + offset);\n                str_out += String.fromCharCode((arr_in[i]['value'] >> 2) + offset);\n                break;\n            case \"attachInterrupt\":\n                str_out += String.fromCharCode(5 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode((arr_in[i]['mode'] << 2) + offset);\n                break;\n            case \"detachInterrupt\":\n                str_out += String.fromCharCode(6 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                break;\n            case \"digitalToggle\":\n                str_out += String.fromCharCode(7 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                break;\n            case \"ping\":\n                str_out += String.fromCharCode(8 + offset);\n                break;\n            case \"attachDebounceInterrupt\":\n                str_out += String.fromCharCode(9 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode((arr_in[i]['mode'] << 2) + offset);\n                break;\n            default:\n                break;\n        }\n        i++\n    } while (i < arr_in.length);\n}\n\nmsg.payload = str_out;\n\nreturn msg;\n",
+        "func": "\nvar str_out = \"\";\nvar arr_in = JSON.parse(msg.payload);\nvar i=0;\nvar tmp = \"\";\nvar offset = 48;\n\nif(arr_in && arr_in.length >0){\n    do{\n        switch(arr_in[i]['function']){\n            case \"reset\":\n                str_out += String.fromCharCode(0+offset);   //0 is the code of reset's command\n                break;\n            case \"pinMode\":\n                str_out += String.fromCharCode(1+offset);   //1 is the code of pinMode's command\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);   \n                str_out += String.fromCharCode( (arr_in[i]['mode'] << 2 ) + offset); \n                break;\n            case \"digitalRead\":\n                str_out += String.fromCharCode(2+offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                break;\n            case \"digitalWrite\":\n                str_out += String.fromCharCode(3+offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode(arr_in[i]['value'] + offset);\n                break;\n            case \"analogWrite\":\n                str_out += String.fromCharCode(4 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n\n                str_out += String.fromCharCode( (arr_in[i]['value'] & 0x0003) + offset);\n                str_out += String.fromCharCode(((arr_in[i]['value'] >> 2)& 0x003F) + offset);\n                str_out += String.fromCharCode(((arr_in[i]['value'] >> 8) & 0x003F) + offset);\n                //console.log(str_out+\"\\n\");\n                break;\n            case \"attachInterrupt\":\n                str_out += String.fromCharCode(5 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode((arr_in[i]['mode'] << 2) + offset);\n                break;\n            case \"detachInterrupt\":\n                str_out += String.fromCharCode(6 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                break;\n            case \"digitalToggle\":\n                str_out += String.fromCharCode(7 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                break;\n            case \"ping\":\n                str_out += String.fromCharCode(8 + offset);\n                break;\n            case \"attachDebounceInterrupt\":\n                str_out += String.fromCharCode(9 + offset);\n                str_out += String.fromCharCode(arr_in[i]['pin'] + offset);\n                str_out += String.fromCharCode((arr_in[i]['mode'] << 2) + offset);\n                break;\n            default:\n                break;\n        }\n        i++\n    } while (i < arr_in.length);\n}\n\nmsg.payload = str_out;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -430,11 +430,11 @@
         "topic": "",
         "payload": "\"[{\\\"function\\\":\\\"digitalWrite\\\",\\\"pin\\\":6,\\\"value\\\":1}]\"",
         "payloadType": "json",
-        "x": 170,
-        "y": 240,
+        "x": 230,
+        "y": 260,
         "wires": [
             [
-                "1c467d5b7f441483"
+                "a8912164f0362c22"
             ]
         ]
     },
@@ -459,11 +459,11 @@
         "topic": "",
         "payload": "\"[{\\\"function\\\":\\\"digitalWrite\\\",\\\"pin\\\":6,\\\"value\\\":0}]\"",
         "payloadType": "json",
-        "x": 170,
-        "y": 300,
+        "x": 230,
+        "y": 340,
         "wires": [
             [
-                "1c467d5b7f441483"
+                "b2d8d53c0a289227"
             ]
         ]
     },
@@ -472,7 +472,7 @@
         "type": "mqtt in",
         "z": "bbe3ae4f9ae51c8f",
         "name": "",
-        "topic": "esp1/ready",
+        "topic": "esp1/in/ready",
         "qos": "0",
         "datatype": "auto-detect",
         "broker": "b588965e00983323",
@@ -480,8 +480,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 120,
-        "y": 80,
+        "x": 230,
+        "y": 120,
         "wires": [
             [
                 "bd59765191362f0b"
@@ -493,8 +493,8 @@
         "type": "subflow:208e991693e179cb",
         "z": "bbe3ae4f9ae51c8f",
         "name": "",
-        "x": 460,
-        "y": 260,
+        "x": 720,
+        "y": 300,
         "wires": [
             [
                 "790a1f4e15a9391a"
@@ -515,8 +515,8 @@
         "correl": "",
         "expiry": "",
         "broker": "b588965e00983323",
-        "x": 680,
-        "y": 260,
+        "x": 940,
+        "y": 300,
         "wires": []
     },
     {
@@ -531,8 +531,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 360,
-        "y": 40,
+        "x": 500,
+        "y": 120,
         "wires": []
     },
     {
@@ -545,7 +545,7 @@
         "order": 1,
         "width": 0,
         "height": 0,
-        "emulateClick": false,
+        "emulateClick": true,
         "tooltip": "",
         "color": "",
         "bgcolor": "",
@@ -566,12 +566,11 @@
         "enablePointerup": false,
         "pointerupPayload": "",
         "pointerupPayloadType": "str",
-        "x": 200,
-        "y": 420,
+        "x": 500,
+        "y": 260,
         "wires": [
             [
-                "1c467d5b7f441483",
-                "a75c46e0ceacca72"
+                "1c467d5b7f441483"
             ]
         ]
     },
@@ -585,7 +584,7 @@
         "order": 2,
         "width": 0,
         "height": 0,
-        "emulateClick": false,
+        "emulateClick": true,
         "tooltip": "",
         "color": "",
         "bgcolor": "",
@@ -606,30 +605,13 @@
         "enablePointerup": false,
         "pointerupPayload": "",
         "pointerupPayloadType": "str",
-        "x": 200,
-        "y": 500,
+        "x": 500,
+        "y": 340,
         "wires": [
             [
-                "1c467d5b7f441483",
-                "a75c46e0ceacca72"
+                "1c467d5b7f441483"
             ]
         ]
-    },
-    {
-        "id": "a75c46e0ceacca72",
-        "type": "debug",
-        "z": "bbe3ae4f9ae51c8f",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 540,
-        "y": 440,
-        "wires": []
     },
     {
         "id": "0cb04c0809da8e0e",
@@ -641,7 +623,7 @@
         "order": 1,
         "width": 0,
         "height": 0,
-        "emulateClick": false,
+        "emulateClick": true,
         "tooltip": "",
         "color": "",
         "bgcolor": "",
@@ -662,8 +644,8 @@
         "enablePointerup": false,
         "pointerupPayload": "",
         "pointerupPayloadType": "str",
-        "x": 260,
-        "y": 660,
+        "x": 500,
+        "y": 520,
         "wires": [
             [
                 "09963eed65b33fe0"
@@ -675,12 +657,11 @@
         "type": "subflow:208e991693e179cb",
         "z": "bbe3ae4f9ae51c8f",
         "name": "",
-        "x": 480,
-        "y": 660,
+        "x": 720,
+        "y": 520,
         "wires": [
             [
-                "3a78522010606eb4",
-                "f2947fae6a979622"
+                "3a78522010606eb4"
             ]
         ]
     },
@@ -698,25 +679,38 @@
         "correl": "",
         "expiry": "",
         "broker": "b588965e00983323",
-        "x": 680,
-        "y": 660,
+        "x": 920,
+        "y": 520,
         "wires": []
     },
     {
-        "id": "f2947fae6a979622",
-        "type": "debug",
+        "id": "a79c4090b164fd77",
+        "type": "inject",
         "z": "bbe3ae4f9ae51c8f",
-        "name": "debug 4",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 700,
-        "y": 560,
-        "wires": []
+        "name": "Reset",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 520,
+        "wires": [
+            [
+                "0cb04c0809da8e0e"
+            ]
+        ]
     },
     {
         "id": "15e1ab3e16800248",
@@ -735,9 +729,9 @@
         "topicType": "msg",
         "thumbLabel": "true",
         "showTicks": "always",
-        "min": 0,
-        "max": "255",
-        "step": 1,
+        "min": "0",
+        "max": "4095",
+        "step": "1",
         "className": "",
         "iconPrepend": "",
         "iconAppend": "",
