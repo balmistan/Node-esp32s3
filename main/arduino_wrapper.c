@@ -7,6 +7,7 @@ static const char *TAG = "ARDUINO_WRAPPER";
 
 // for analogWrite ///////////////
 bool is_analog_initialized = false;
+bool is_servo_initialized = false;
 uint8_t used_channels = 0;
 gpio_num_t configured_gpios[8];
 
@@ -52,29 +53,58 @@ int digitalRead(gpio_num_t pin)
     return gpio_get_level(pin);
 }
 
-void analogWrite(gpio_num_t pin, uint16_t value)
+void analogWrite20KHz(gpio_num_t pin, uint16_t value){ // for LEDs and DC motors
+    pwmWrite(pin, value, PWM_LED);
+}
+
+void analogWrite50Hz(gpio_num_t pin, uint16_t value){    // for servomotors
+    pwmWrite(pin, value, PWM_SERVO);
+}
+
+
+void pwmWrite(gpio_num_t pin, uint16_t value, uint8_t pwmtype)
 {
 uint8_t ch_index=0;
-const ledc_mode_t ledc_mode        = LEDC_LOW_SPEED_MODE;
+const ledc_mode_t ledc_mode = LEDC_LOW_SPEED_MODE;
+ledc_timer_t ledc_tm;
+if(pwmtype==PWM_LED){
+    ledc_tm = LEDC_TIMER_0;
+}else if(pwmtype==PWM_SERVO){
+    ledc_tm = LEDC_TIMER_1;
+}
 
     ESP_LOGI(TAG, "   > analogWrite(%d, %d)", pin, value);
 
-    if (!is_analog_initialized)
+    if (pwmtype == PWM_LED && !is_analog_initialized)
     {
         // PWM resolution: 12 bits -> values from 0 to 4095. Duty cicle step: ca 0.024%
 
         ledc_timer_config_t ledc_timer = {
             .speed_mode = ledc_mode,
-            .timer_num = LEDC_TIMER_0,
+            .timer_num = ledc_tm,
             .duty_resolution = LEDC_TIMER_12_BIT,
             .freq_hz = 10000,
             .clk_cfg = LEDC_AUTO_CLK};
         ledc_timer_config(&ledc_timer);
         is_analog_initialized = true;
-        ESP_LOGI(TAG, "timer 0 is configured!");
+        ESP_LOGI(TAG, "timer %d is configured!", ledc_tm);
+    }else if(pwmtype == PWM_SERVO && !is_servo_initialized){
+
+        //SERVOMOTOR
+// PWM resolution: 14 bits -> values from 0 to 16383. Duty cicle step: ca 0.061%
+
+        ledc_timer_config_t ledc_timer = {
+            .speed_mode = ledc_mode,
+            .timer_num = ledc_tm,
+            .duty_resolution = LEDC_TIMER_14_BIT,
+            .freq_hz = 50,
+            .clk_cfg = LEDC_AUTO_CLK};
+        ledc_timer_config(&ledc_timer);
+        is_servo_initialized = true;
+         ESP_LOGI(TAG, "timer %d is configured!", ledc_tm);
     }
 
-    if (used_channels == 4)
+    if (used_channels == 8)
     {
         ESP_LOGE(TAG, "No analog  outputs available. Maximum 8 already used!");
     }
@@ -97,11 +127,13 @@ const ledc_mode_t ledc_mode        = LEDC_LOW_SPEED_MODE;
             used_channels++;
         }
     }
+
     // Configure channel
+    
     ledc_channel_config_t ledc_channel = {
         .speed_mode =  ledc_mode,
-        .channel = ch_index,
-        .timer_sel = LEDC_TIMER_0,
+        .channel = ch_index,             // at this point, ch_index corresponds to the channel associated with the pin we are using
+        .timer_sel = ledc_tm,
         .intr_type = LEDC_INTR_DISABLE,
         .gpio_num = pin,
         .duty = value, 
