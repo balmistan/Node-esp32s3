@@ -29,7 +29,7 @@ void loop() {
 }
 ```
 
-## Example Raspi-Esp: Set D0 Pin High to Turn On an LED
+## Example Node-Esp32s3: Set GPIO 5 Pin High to Turn On an LED
 
 ```json
 [
