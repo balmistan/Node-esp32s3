@@ -9,7 +9,7 @@ static const char *TAG = "MQTT_UTILS";
 #define PM 1   // pinMode
 #define DR 2   // digitalRead
 #define DW 3   // digitalWrite
-#define AW 4   // analogWrite
+#define AW 4   // analogWrite         (for servoWrite, the same analogWrite function will be used. The value of a bit in the received string makes the difference)
 #define AI 5   // attachInterrupt
 #define DI 6   // detacheInzerrupt
 #define DT 7   // digitalToggle
