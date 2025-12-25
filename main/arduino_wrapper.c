@@ -66,7 +66,7 @@ void pwmWrite(gpio_num_t pin, uint16_t value, uint8_t pwmtype)
 {
 uint8_t ch_index=0;
 const ledc_mode_t ledc_mode = LEDC_LOW_SPEED_MODE;
-ledc_timer_t ledc_tm;
+ledc_timer_t ledc_tm = LEDC_TIMER_0;          // I set a default value to avoid using an uninitialized variable. This should never happen.
 if(pwmtype==PWM_LED){
     ledc_tm = LEDC_TIMER_0;
 }else if(pwmtype==PWM_SERVO){

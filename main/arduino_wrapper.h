@@ -11,7 +11,7 @@
 
 void pinMode(gpio_num_t pin, uint8_t mode);
 void digitalWrite(gpio_num_t pin, uint8_t level);
-void analogWrite20KHz(gpio_num_t pin, uint16_t value); for DC motors
+void analogWrite20KHz(gpio_num_t pin, uint16_t value); //for DC motors
 void analogWrite50Hz(gpio_num_t pin, uint16_t value);
 void pwmWrite(gpio_num_t pin, uint16_t value, uint8_t pwmtype);
 

@@ -125,8 +125,6 @@ void commands(char *receved_msg)
             i+=3;
             break;
             */
-      case SW: // servoWrite()
-        analogWrite5oHZ() break;
       default:
         ESP_LOGI(TAG, "   > command %d not found!", cmd);
         exit_on_error = true;
