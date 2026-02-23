@@ -1,0 +1,9 @@
+## IDF Component Manager Manifest File
+
+dependencies:
+  # Richiede ESP-IDF v6 o superiore
+  idf:
+    version: ">=6.0.0"
+
+  # Ultima versione compatibile di MQTT dal registry ufficiale
+  espressif/mqtt: "*"
